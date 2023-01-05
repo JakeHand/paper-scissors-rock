@@ -1,135 +1,94 @@
-let paper = document.getElementById('paper');
-let scissors = document.getElementById('scissors');
-let rock = document.getElementById('rock');
+// Player choice
+const paper = document.getElementById('paper');
+const scissors = document.getElementById('scissors');
+const rock = document.getElementById('rock');
+
+// Game responses
+const player = document.getElementById('player');
+const computer = document.getElementById('computer');
+const outcome = document.getElementById('outcome');
+const playerScore = document.getElementById('player-score');
+const computerScore = document.getElementById('computer-score');
+
+// Computer's choice innerHTML
+const computerPaper = 'The computer played paper!';
+const computerScissors = 'The computer played scissors!';
+const computerRock = 'The computer played rock!';
+
+// Keep track of scores
+let playerScoreCount = 0;
+let computerScoreCount = 0;
+
+// Outcome response
+const tie = 'You tied!';
+
+const win = function() {
+    outcome.innerHTML = 'You won!';
+    playerScoreCount++;
+    playerScore.innerHTML = 'Your score: ' + playerScoreCount;
+}
+
+const lose = function() {
+    outcome.innerHTML = 'You lost!';
+    computerScoreCount++;
+    computerScore.innerHTML = 'Your score: ' + computerScoreCount;
+}
+
+const computerChoice = function() {
+    const randomNumber = Math.floor(Math.random() * 3);
+    let computerChoice;
+    switch (randomNumber) {
+        case 0:
+            computerChoice = 'paper';
+            break;
+        case 1:
+            computerChoice = 'scissors';
+            break;
+        case 2:
+            computerChoice = 'rock';
+            break;
+    }
+    return computerChoice;
+}
 
 paper.onclick = function() {
-    let div = document.createElement('div');
-    div.classList.add('div');
-    document.querySelector('body').appendChild(div);
-
-    let playedPaper = document.createElement('p');
-    playedPaper.innerHTML = 'You played paper!';
-    div.append(playedPaper);
-
-    let randomNumber = Math.floor(Math.random() * 3);
-    let computerChoice;
-    if (randomNumber === 0) {
-        computerChoice = 'paper';
-    } else if (randomNumber === 1) {
-        computerChoice = 'scissors';
-    } else if (randomNumber === 2) {
-        computerChoice = 'rock';
-    }
-    let computerPlay = document.createElement('p');
-    computerPlay.innerHTML = 'The computer played ' + computerChoice + '!';
-    div.append(computerPlay)
-
-    if (computerChoice === 'paper') {
-        let tie = document.createElement('p');
-        tie.innerHTML = 'It was a tie!';
-        div.append(tie);
-    } else if (computerChoice === 'scissors') {
-        let lose = document.createElement('p');
-        lose.innerHTML = 'You lost!';
-        div.append(lose);
-    } else if (computerChoice === 'rock') {
-        let win = document.createElement('p');
-        win.innerHTML = 'You won!';
-        div.append(win);
-    }
-
-    let playAgain = document.createElement('button');
-    playAgain.innerHTML = 'Play again';
-    div.append(playAgain);
-    playAgain.onclick = function() {
-        playAgain.parentElement.remove();
+    player.innerHTML = 'You played paper!';
+    if (computerChoice() === 'rock') {
+        computer.innerHTML = computerRock;
+        win();
+    } else if (computerChoice() === 'scissors') {
+        computer.innerHTML = computerScissors;
+        lose();
+    } else if (computerChoice() === 'paper') {
+        computer.innerHTML = computerPaper;
+        outcome.innerHTML = tie;
     }
 }
 
 scissors.onclick = function() {
-    let div = document.createElement('div');
-    div.classList.add('div');
-    document.querySelector('body').appendChild(div);
-
-    let playedScissors = document.createElement('p');
-    playedScissors.innerHTML = 'You played scissors!';
-    div.append(playedScissors)
-
-    let choiceNumber = Math.floor(Math.random() * 3);
-    let computerChoice;
-    if (choiceNumber === 0) {
-        computerChoice = 'paper';
-    } else if (choiceNumber === 1) {
-        computerChoice = 'scissors';
-    } else if (choiceNumber === 2) {
-        computerChoice = 'rock';
-    }
-    let computerPlay = document.createElement('p');
-    computerPlay.innerHTML = 'The computer played ' + computerChoice + '!';
-    div.append(computerPlay);
-
-    if (computerChoice === 'scissors') {
-        let tie = document.createElement('p');
-        tie.innerHTML = 'It was a tie!';
-        div.append(tie);
-    } else if (computerChoice === 'rock') {
-        let lose = document.createElement('p');
-        lose.innerHTML = 'You lost!';
-        div.append(lose);
-    } else if (computerChoice === 'paper') {
-        let win = document.createElement('p');
-        win.innerHTML = 'You won!';
-        div.append(win);
-    }
-
-    let playAgain = document.createElement('button');
-    playAgain.innerHTML = 'Play again';
-    div.append(playAgain);
-    playAgain.onclick = function() {
-        playAgain.parentElement.remove();
+    player.innerHTML = 'You played scissors!';
+    if (computerChoice() === 'rock') {
+        computer.innerHTML = computerRock;
+        lose();
+    } else if (computerChoice() === 'scissors') {
+        computer.innerHTML = computerScissors;
+        outcome.innerHTML = tie;
+    }  else if (computerChoice() === 'paper') {
+        computer.innerHTML = computerScissors;
+        win();
     }
 }
 
 rock.onclick = function() {
-    let div = document.createElement('div');
-    div.classList.add('div');
-    document.querySelector('body').appendChild(div);
-
-    let playedRock = document.createElement('p');
-    playedRock.innerHTML = 'You played rock!';
-    div.append(playedRock);
-
-    let choiceNumber = Math.floor(Math.random() * 3);
-    let computerChoice;
-    if (choiceNumber === 0) {
-        computerChoice = 'paper';
-    } else if (choiceNumber === 1) {
-        computerChoice = 'scissors';
-    } else if (choiceNumber === 2) {
-        computerChoice = 'rock';
-    }
-    let computerPlay = document.createElement('p');
-    computerPlay.innerHTML = 'The computer played ' + computerChoice + '!';
-    div.append(computerPlay);
-
-    if (computerChoice === 'rock') {
-        let tie = document.createElement('p');
-        tie.innerHTML = 'It was a tie!';
-        div.append(tie);
-    } else if (computerChoice === 'paper') {
-        let lose = document.createElement('p');
-        lose.innerHTML = 'You lost!';
-        div.append(lose);
-    } else if (computerChoice === 'scissors') {
-        let win = document.createElement('p');
-        win.innerHTML = 'You won!';
-        div.append(lose);
-    }
-
-    let playAgain = document.createElement('button');
-    playAgain.innerHTML = 'Play again';
-    div.append(playAgain);
-    playAgain.onclick = function() {
-        playAgain.parentElement.remove();
+    player.innerHTML = 'You played rock!';
+    if (computerChoice() === 'rock') {
+        computer.innerHTML = computerRock;
+        outcome.innerHTML = tie;
+    } else if (computerChoice() === 'scissors') {
+        computer.innerHTML = computerScissors;
+        win();
+    } else if (computerChoice() === 'paper') {
+        computer.innerHTML = computerPaper;
+        lose();
     }
 }
